@@ -1,4 +1,4 @@
-~ /efrei/facebook-api ❯❯❯ chat -e .auteur
+~ /efrei/facebook-api ❯❯❯ cat -e .auteur
 {
   prénom : " Brayan " ,
   nom: " KUTLAR " 
