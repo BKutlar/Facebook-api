@@ -5,12 +5,12 @@ import { HttpStatus, HttpException } from '../errors/HttpException.error';
 export const LoginDTo = async (request, response) => {
   const { email, password } = request.body;
 
-  if(email === undefined || password === undefined){
+  if (email === undefined || password === undefined) {
     throw new HttpException('Unaunthorized,', HttpStatus.UNAUTHORIZED);
   }
 
   const user = await AuthenticationModel.findByCredentials({ email, password }, { id: true, email: true });
-  
+
   if (!user) {
     throw new HttpException('Unaunthorized,', HttpStatus.UNAUTHORIZED);
   }

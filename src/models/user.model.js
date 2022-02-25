@@ -8,16 +8,14 @@ export const deleteOne = async (userId) => {
     });
 }
 
-
-
 export const findAll = async () =>
     prisma.user.findMany();
 
-export const findByCredentials = ({email, password }) =>
+export const findByCredentials = ({ email, password }) =>
     prisma.user.findUnique({
         where: {
             email,
-           
+
         },
 
 

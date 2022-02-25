@@ -15,7 +15,7 @@ export const jwtMiddleware = ({ secret }) =>
       request.user = user;
 
       next();
-    } catch(error) {
+    } catch (error) {
       console.log(error);
       next(new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED));
     }

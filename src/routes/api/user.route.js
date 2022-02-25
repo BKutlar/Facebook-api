@@ -11,6 +11,6 @@ api.patch('/:id/profile', UserController.UpdateProfile);
 api.delete('/:id', UserController.deleteOne);
 
 
-// api.post('/profile', UserController.createProfile); 
+
 
 export default api;
