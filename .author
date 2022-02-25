@@ -1,5 +1,5 @@
-~ /efrei/facebook-api ❯❯❯ cat -e .auteur
+~/efrei/facebook-api ❯❯❯ cat -e .author
 {
-  prénom : " Brayan " ,
-  nom: " KUTLAR " 
+  firstName: "Brayan",
+  lastName: "KUTLAR"
 }
