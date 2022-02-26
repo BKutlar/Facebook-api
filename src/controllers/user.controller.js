@@ -7,7 +7,6 @@ import { ErrorNotFound } from '../errors/NotFound.error';
 export const UpdateProfile = async (request, response) => {
     const { id } = request.params;
     const { firstName, lastName } = request.body;
-    // console.log('ok')
     if(!firstName || !lastName) throw new ErrorBadRequest();
     const Profile = await UserModel.updateProfile({
         userId: id,
