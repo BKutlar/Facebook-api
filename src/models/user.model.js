@@ -1,12 +1,9 @@
 import { PrismaClient } from '@prisma/client';
+import base64url from 'base64url';
 const prisma = new PrismaClient();
 
 
-// export const deleteOne = async (userId) => {
-//     return prisma.profile.delete({
-//         where: { userId },
-//     });
-// }
+
 
 export const deleteOne = async(id)=> {
     return prisma.user.delete({
@@ -14,8 +11,20 @@ export const deleteOne = async(id)=> {
     });
 }
 
-export const findAll = async () =>
-    prisma.user.findMany();
+
+export const findMany = async ({ skip, cursor, limit }) => {
+    const users = await prisma.user.findMany({
+      skip,
+      ...(cursor) ? { cursor }:{},
+      take: limit,
+    });
+  
+    return users.map((user) => ({
+      ...user,
+      cursor: base64url.encode(JSON.stringify({ id: user.id })),
+    }));
+  }
+  
 
 export const findByCredentials = ({ email, password }) =>
     prisma.user.findUnique({
@@ -23,9 +32,8 @@ export const findByCredentials = ({ email, password }) =>
             email,
 
         },
+  });
 
-
-    });
 
 export const findById = ({ id }) =>
     prisma.user.findUnique({

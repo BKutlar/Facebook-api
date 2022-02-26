@@ -1,12 +1,14 @@
 import * as PostModel from '../models/post.model';
+import { ErrorBadRequest } from '../errors/BadRequest.error';
+import { ErrorNotFound } from '../errors/NotFound.error';
 
 export const CreatePostDto = async ({ body, user }, response) => {
   const { message } = body;
+  if(!message) throw new ErrorBadRequest(); 
   const post = await PostModel.createOne({
     message,
     authorId: user.id,
   });
-
   response
     .status(201)
     .json({ data: { post } });
@@ -15,7 +17,7 @@ export const CreatePostDto = async ({ body, user }, response) => {
 export const findById = async (request, response) => {
   const id = Number(request.params.id);
   const post = await PostModel.findById(id);
-
+  if(!post) throw new ErrorNotFound();
   response.json({ post });
 }
 
@@ -30,7 +32,7 @@ export const UpdatePostDto = async (request, response) => {
 
   const { id } = request.params;
   const { message } = request.body;
-
+  if(!message) throw new ErrorBadRequest();
   const post = await PostModel.updateOne({
 
     id: Number(id),
