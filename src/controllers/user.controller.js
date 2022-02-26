@@ -1,12 +1,14 @@
 import * as UserModel from '../models/user.model';
 import base64url from "base64url";
-
+import { ErrorBadRequest } from '../errors/BadRequest.error';
+import { ErrorNotFound } from '../errors/NotFound.error';
 
 
 export const UpdateProfile = async (request, response) => {
     const { id } = request.params;
     const { firstName, lastName } = request.body;
     // console.log('ok')
+    if(!firstName || !lastName) throw new ErrorBadRequest();
     const Profile = await UserModel.updateProfile({
         userId: id,
         firstName,
