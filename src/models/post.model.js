@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import base64url from 'base64url';
 const prisma = new PrismaClient();
 
 
@@ -27,7 +28,7 @@ export const findById = async (id) => {
     return prisma.post.findUnique({
         where: {
             id
-        }
+        },
     });
 }
 
@@ -47,3 +48,4 @@ export const updateOne = ({ id, message }) => {
 
     })
 }
+

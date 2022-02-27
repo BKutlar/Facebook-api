@@ -1,4 +1,5 @@
 import * as PostModel from '../models/post.model';
+import base64url from 'base64url';
 import { ErrorBadRequest } from '../errors/BadRequest.error';
 import { ErrorNotFound } from '../errors/NotFound.error';
 
@@ -18,7 +19,9 @@ export const findById = async (request, response) => {
   const id = Number(request.params.id);
   const post = await PostModel.findById(id);
   if(!post) throw new ErrorNotFound();
-  response.json({ post });
+  response
+  .status(200)
+  .json({ post, });
 }
 
 
@@ -51,3 +54,4 @@ export const deleteOne = async (request, response) => {
 
   response.status(204).end();
 }
+

@@ -31,7 +31,7 @@ export const deleteOne = async (request, response) => {
 export const getProfile = async (request, response) => {
     const { id } = request.params;
     const profile = await UserModel.getProfile(id);
-
+    if(!profile) throw new ErrorNotFound();
     response.json({ profile })
 
 
@@ -40,13 +40,13 @@ export const getProfile = async (request, response) => {
 export const getPost = async (request, response) => {
     const { id } = request.params;
     const posts = await UserModel.getPost(id);
-
+    if(!posts) throw new ErrorNotFound(); 
     response.json({ posts })
 };
 
 
 export const paginateKeyset = async (request, response) => {
-    const { API_URL = 'http://localhost:8081/api/v1/users' } = process.env;
+    const { API_URL = 'http://localhost:8081/api' } = process.env;
   
     const { cursor = '' } = request.query;
     const limit = parseInt(request.query.limit || '5');
@@ -59,8 +59,8 @@ export const paginateKeyset = async (request, response) => {
   
     const nextCursor = users[users.length - 1].cursor;
   
-    const next = `${API_URL}/v1/articles?cursor=${nextCursor}&limit=${Math.abs(limit)}`;
-    const previous = `${API_URL}/v1/articles?cursor=${cursor}&limit=${-limit}`;
+    const next = `${API_URL}/v1/users?cursor=${nextCursor}&limit=${Math.abs(limit)}`;
+    const previous = `${API_URL}/v1/users?cursor=${cursor}&limit=${-limit}`;
   
     response
       .status(200)
