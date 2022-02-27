@@ -26,12 +26,14 @@ export const findMany = async ({ skip, cursor, limit }) => {
   }
   
 
-export const findByCredentials = ({ email, password }) =>
-    prisma.user.findUnique({
+export const findByCredentials = ({ email, password, select }) =>
+    prisma.user.findFirst({
         where: {
             email,
-
+            password
         },
+
+        select, 
   });
 
 
@@ -40,7 +42,7 @@ export const findById = ({ id }) =>
         where: { id },
     });
 
-export const createOne = async ({ email,
+export const createOne = ({ email,
     password }) =>
     prisma.user.create({
         data: {
