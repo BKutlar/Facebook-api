@@ -37,7 +37,6 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 model Profile {
   id        Int    @id @default(autoincrement())
   firstName String
@@ -47,7 +46,6 @@ model Profile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 model Post {
   id       Int    @id @default(autoincrement())
   message  String
@@ -87,7 +85,7 @@ model Post {
 | `GET`    | `/:id/posts`   | `Authorization: TOKEN` | `null`          | `{ posts: Post[] }`    | return a list of User's posts. |
 | `GET`    | `/:id/profile` | `Authorization: TOKEN` | `null`          | `{ profile: Profile }` | return a User's profile.       |
 | `PATCH`  | `/:id/profile` | `Authorization: TOKEN` | `UpdateProfile` | `{ profile: Profile }` | update a User's profile.       |
-| `DELETE` | `/:id`         | `Authorization: TOKEN` | `null`          | `null`                 | update a User's profile.       |
+| `DELETE` | `/:id`         | `Authorization: TOKEN` | `null`          | `null`                 | delete an user by it's id.     |
 
 ## `/api/v1/posts`
 
